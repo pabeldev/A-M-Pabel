@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A M Pabel | Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;900&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { color: #ffffff; font-family: 'Poppins', 'Hind Siliguri', sans-serif; overflow-x: hidden; background: #020508; line-height: 1.6; }
+
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 100px 20px; position: relative; width: 100%; }
+
+        /* --- Backgrounds --- */
+        #home { background: radial-gradient(circle at center, #1e4b7a 0%, #030a12 100%); }
+        #work { background: #0a1f33; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        #about { background: #0d2842; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        #brands { background: #071a2e; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        #contact { background: #061626; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+        /* --- Hero Section --- */
+        .main-logo { max-width: 150px; margin-bottom: 25px; filter: drop-shadow(0 0 15px rgba(179, 217, 255, 0.4)); }
+        h1 { font-size: clamp(40px, 8vw, 70px); font-weight: 900; text-transform: uppercase; text-align: center; letter-spacing: 2px; line-height: 1.1; margin-bottom: 20px; }
+        .light-text { font-size: 14px; letter-spacing: 5px; color: #b3d9ff; text-transform: uppercase; margin-bottom: 10px; opacity: 0.9; }
+        
+        .skill-tags { display: flex; gap: 20px; margin: 20px 0 30px; opacity: 0.9; font-size: 14px; flex-wrap: wrap; justify-content: center; }
+        .skill-tags span { display: flex; align-items: center; gap: 8px; color: #ffffff; }
+        .skill-tags span i { color: #b3d9ff; font-size: 16px; }
+
+        .hero-socials { display: flex; gap: 25px; }
+        .hero-socials a { color: #ffffff !important; font-size: 24px; transition: 0.3s; opacity: 0.7; text-decoration: none; }
+        .hero-socials a:hover { opacity: 1; color: #b3d9ff !important; transform: translateY(-3px); }
+
+        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 26px; color: #b3d9ff; animation: bounce 2s infinite; cursor: pointer; text-decoration: none; z-index: 5; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-10px) translateX(-50%); } }
+
+        /* --- Work Section --- */
+        .section-title { font-size: clamp(26px, 4vw, 36px); font-weight: 500; margin-bottom: 45px; text-align: center; font-family: 'Hind Siliguri'; color: #b3d9ff; }
+        
+        .tab-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 12px 32px; border-radius: 50px; cursor: pointer; margin: 0 10px 45px; font-family: 'Hind Siliguri'; transition: 0.3s; }
+        .tab-btn.active { background: #ffffff; color: #03070b; font-weight: 600; }
+
+        .work-grid { display: none; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; max-width: 1200px; }
+        .work-grid.active { display: grid; }
+        .work-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden; transition: 0.4s; }
+        .work-card:hover { transform: translateY(-8px); border-color: rgba(179, 217, 255, 0.2); }
+        
+        .media-box { position: relative; width: 100%; padding-top: 56.25%; background: #000; overflow: hidden; cursor: pointer; }
+        .media-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: 0.5s; }
+        .media-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; opacity: 0; z-index: 1; pointer-events: none; }
+        .media-box.playing iframe { opacity: 1; z-index: 3; pointer-events: auto; }
+        
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); }
+        .play-circle { width: 50px; height: 50px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .play-circle i { color: #03070b; font-size: 18px; margin-left: 2px; }
+        
+        .card-info h3 { padding: 15px; font-size: 14px; font-family: 'Hind Siliguri'; color: #e0e0e0; text-align: center; font-weight: 400; }
+
+        .view-more-btn { margin-top: 50px; text-decoration: none; color: #ffffff; font-weight: 500; font-size: 15px; padding: 14px 35px; border-radius: 50px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); transition: 0.4s; display: none; align-items: center; gap: 10px; }
+        .view-more-btn.active { display: inline-flex; }
+        .view-more-btn:hover { background: #ffffff; color: #03070b; transform: translateY(-3px); }
+
+        /* --- About --- */
+        .about-container { max-width: 1000px; width: 100%; display: flex; align-items: center; gap: 50px; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .about-img { width: 300px; height: 350px; background: url('https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Self.png') center/cover; border-radius: 15px; flex-shrink: 0; }
+        .about-text h2 { color: #b3d9ff; font-family: 'Hind Siliguri'; margin-bottom: 15px; font-size: 30px; }
+
+        /* --- Brands Section --- */
+        #brands { min-height: auto; padding: 80px 20px; }
+
+        .brands-wrapper { max-width: 1100px; width: 100%; }
+
+        .brands-subtitle { text-align: center; color: rgba(179, 217, 255, 0.6); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; margin-top: -20px; }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .brand-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            padding: 28px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(179, 217, 255, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(179, 217, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-card:hover::before { opacity: 1; }
+
+        .brand-logo-wrap {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.92);
+            border-radius: 10px;
+            padding: 12px 16px;
+            overflow: hidden;
+        }
+
+        .brand-logo-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: none;
+        }
+
+        .brand-name {
+            font-size: 13px;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.5px;
+            text-align: center;
+            font-family: 'Hind Siliguri';
+        }
+
+        /* --- Contact --- */
+        .contact-box { max-width: 600px; width: 100%; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); }
+        .contact-box input, .contact-box textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-family: 'Hind Siliguri'; outline: none; }
+        .contact-box button { width: 100%; padding: 16px; background: #b3d9ff; border: none; border-radius: 10px; font-weight: 700; color: #03070b; cursor: pointer; transition: 0.3s; }
+
+        /* --- Footer --- */
+        footer { padding: 60px 20px; background: #02060a; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .footer-logo { max-width: 100px; margin-bottom: 15px; opacity: 0.8; }
+        .footer-name { font-size: 18px; font-weight: 600; letter-spacing: 2px; color: #b3d9ff; margin-bottom: 20px; }
+        .footer-nav a { color: #fff; text-decoration: none; margin: 0 12px; opacity: 0.6; font-size: 14px; transition: 0.3s; }
+        .footer-nav a:hover { opacity: 1; color: #b3d9ff; }
+        .copy-text { opacity: 0.3; font-size: 12px; margin-top: 30px; }
+        .copy-text a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .copy-text a:hover { color: #b3d9ff; border-color: #b3d9ff; }
+
+        @media (max-width: 1024px) { .work-grid { grid-template-columns: repeat(2, 1fr); } .about-container { flex-direction: column; text-align: center; } .brands-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .work-grid { grid-template-columns: 1fr; } .brands-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .brands-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <section id="home">
+        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/PabelEDP-White.png" class="main-logo">
+        <span class="light-text">Visual Stories Crafted by</span>
+        <h1>A M PABEL</h1>
+        <div class="skill-tags">
+            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Motion Artist</span>
+            <span><i class="fa-solid fa-video"></i> Video Editor</span>
+            <span><i class="fa-solid fa-bezier-curve"></i> Graphic Designer</span>
+        </div>
+        
+        <div class="hero-socials">
+            <a href="https://linkedin.com/in/pabeledp" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://x.com/PabelEDP" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://behance.net/PabelEDP" target="_blank"><i class="fa-brands fa-behance"></i></a>
+            <a href="https://facebook.com/ProductiveEDP" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+        <a href="#work" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title">আমার কিছু কাজ</h2>
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="openTab('video')">Video & Motion</button>
+            <button class="tab-btn" onclick="openTab('graphic')">Graphic Design</button>
+        </div>
+
+        <div id="video" class="work-grid active">
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/jj62GlZTYeg/maxresdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/jj62GlZTYeg?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Motion Graphics Reel 2024</h3></div>
+            </div>
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/3Nr5HdsloYQ/maxresdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/3Nr5HdsloYQ?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>3D Book Promo</h3></div>
+            </div>
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/X5kDTFky4-w/hqdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/X5kDTFky4-w?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>3D Book Promo - Version 2</h3></div>
+            </div>
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/zdZs0M54n_8/maxresdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/zdZs0M54n_8?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Web UI Animation</h3></div>
+            </div>
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/T8_8yD2WeAo/maxresdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/T8_8yD2WeAo?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Kinetic Typography</h3></div>
+            </div>
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/fDe1DLLIftk/maxresdefault.jpg">
+                    <iframe src="https://www.youtube.com/embed/fDe1DLLIftk?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Master Card Promo</h3></div>
+            </div>
+        </div>
+
+        <div id="graphic" class="work-grid">
+            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Eid-EduBD-Behance-Thumbnail-by-Pabel.png"></div><div class="card-info"><h3>Eid Campaign</h3></div></div>
+            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Thumbnail-Designs.png"></div><div class="card-info"><h3>Thumbnails</h3></div></div>
+            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Social-Post-Designs.png"></div><div class="card-info"><h3>Social Media</h3></div></div>
+        </div>
+
+        <a href="https://youtube.com/@PabelEDP" id="yt-link" target="_blank" class="view-more-btn active"><i class="fa-brands fa-youtube"></i> Visit YouTube Channel</a>
+        <a href="https://behance.net/PabelEDP" id="bh-link" target="_blank" class="view-more-btn"><i class="fa-brands fa-behance"></i> View More on Behance</a>
+        <a href="#about" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <div class="about-img"></div>
+            <div class="about-text">
+                <h2>আমার সম্পর্কে</h2>
+                <p>ভিজ্যুয়াল আর্টের প্রতি ভালোবাসা থেকে ২০১৯ সালে শখের বশে আমার এই যাত্রা শুরু হয়েছিল। সেই শখ থেকেই নিজেকে গড়ে তুলেছি একজন দক্ষ ডিজাইনার হিসেবে। ২০২২ সাল থেকে প্রফেশনাল গ্রাফিক ডিজাইনের মাধ্যমে অসংখ্য প্রজেক্ট সফলভাবে সম্পন্ন করেছি। সময়ের সাথে নিজেকে আরও এক ধাপ এগিয়ে নিতে ২০২৪ সাল থেকে আমি Motion Graphics এবং Video Editing-কে আমার মূল ফোকাস হিসেবে গ্রহণ করি। স্থিরচিত্রকে গতিশীল এবং প্রাণবন্ত ভিডিওতে রূপান্তর করে যেকোনো ব্র্যান্ডের গল্পকে আকর্ষণীয়ভাবে উপস্থাপন করাই এখন আমার লক্ষ্য।</p>
+                <div class="hero-socials" style="margin-top: 15px;">
+                    <a href="https://linkedin.com/in/pabeledp" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://x.com/PabelEDP" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://behance.net/PabelEDP" target="_blank"><i class="fa-brands fa-behance"></i></a>
+                    <a href="https://facebook.com/ProductiveEDP" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="#brands" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <!-- ===== BRANDS SECTION ===== -->
+    <section id="brands">
+        <div class="brands-wrapper">
+            <h2 class="section-title">Brands I've Worked With</h2>
+            <p class="brands-subtitle">Trusted by businesses across industries</p>
+
+            <div class="brands-grid">
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Infinity.webp" alt="Infinity Mega Mall">
+                    </div>
+                    <span class="brand-name">Infinity Mega Mall</span>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Shikor-TV.webp" alt="Canada Shikor TV">
+                    </div>
+                    <span class="brand-name">Canada Shikor TV</span>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/BIIC.png" alt="Banglay IELTS">
+                    </div>
+                    <span class="brand-name">Banglay IELTS & Immigration Center</span>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/reThink.jpg" alt="reThink">
+                    </div>
+                    <span class="brand-name">reThink</span>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Education-BD.png" alt="Education BD">
+                    </div>
+                    <span class="brand-name">Education BD</span>
+                </div>
+
+                <div class="brand-card">
+                    <div class="brand-logo-wrap">
+                        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Rumi-Dream-Homes.jpg" alt="Rumi Dream Homes">
+                    </div>
+                    <span class="brand-name">Rumi Dream Homes</span>
+                </div>
+
+            </div>
+        </div>
+        <a href="#contact" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">যোগাযোগ করুন</h2>
+        <div class="contact-box">
+            <form action="https://formspree.io/f/mqegkgoe" method="POST">
+                <input type="text" name="name" placeholder="আপনার নাম" required>
+                <input type="email" name="email" placeholder="আপনার ইমেইল" required>
+                <textarea name="message" rows="5" placeholder="আপনার বার্তা..." required></textarea>
+                <button type="submit">বার্তা পাঠান</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/PabelEDP-White.png" class="footer-logo">
+        <div class="footer-name">A M PABEL</div>
+        <div class="footer-nav">
+            <a href="#home">Home</a> • <a href="#work">Portfolio</a> • <a href="#about">About</a> • <a href="#brands">Brands</a> • <a href="#contact">Contact</a>
+        </div>
+        <p class="copy-text">Copyright © 2026 | Developed by <a href="https://framempire.com" target="_blank">FramEmpire</a></p>
+    </footer>
+
+    <script>
+        function openTab(tabName) {
+            document.querySelectorAll('.work-grid').forEach(g => g.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.view-more-btn').forEach(v => v.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+            if(tabName === 'video') document.getElementById('yt-link').classList.add('active');
+            else document.getElementById('bh-link').classList.add('active');
+        }
+
+        function playVid(el) {
+            const iframe = el.querySelector('iframe');
+            if (!iframe) return;
+            const videoSrc = iframe.getAttribute('src');
+            if (!el.classList.contains('playing')) {
+                const separator = videoSrc.indexOf('?') === -1 ? '?' : '&';
+                iframe.setAttribute('src', videoSrc + separator + 'autoplay=1&mute=0');
+                el.classList.add('playing');
+                el.querySelector('img').style.opacity = "0";
+                el.querySelector('.video-overlay').style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
