@@ -19,6 +19,7 @@
     <meta name="twitter:description" content="Motion Artist, Video Editor & Graphic Designer — Visual Stories Crafted by A M Pabel.">
     <meta name="twitter:image" content="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Self.png">
 
+    <link rel="icon" type="image/png" href="https://test.framempire.com/wp/wp-content/uploads/2026/03/PabelEDP-White.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;900&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -71,6 +72,13 @@
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); }
         .play-circle { width: 50px; height: 50px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
         .play-circle i { color: #03070b; font-size: 18px; margin-left: 2px; }
+
+        /* Behance hover overlay */
+        .behance-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0); transition: background 0.3s; }
+        .behance-overlay i { font-size: 36px; color: #fff; opacity: 0; transform: scale(0.8); transition: all 0.3s; }
+        .graphic-card:hover .behance-overlay { background: rgba(0,0,0,0.45); }
+        .graphic-card:hover .behance-overlay i { opacity: 1; transform: scale(1); }
+        .graphic-card { cursor: pointer; }
         
         .card-info h3 { padding: 15px; font-size: 14px; font-family: 'Hind Siliguri'; color: #e0e0e0; text-align: center; font-weight: 400; }
 
@@ -85,74 +93,16 @@
 
         /* --- Brands Section --- */
         #brands { min-height: auto; padding: 80px 20px; }
-
         .brands-wrapper { max-width: 1100px; width: 100%; }
-
         .brands-subtitle { text-align: center; color: rgba(179, 217, 255, 0.6); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; margin-top: -20px; }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .brand-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 16px;
-            padding: 28px 20px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .brand-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(179, 217, 255, 0.05) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .brand-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(179, 217, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
+        .brands-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .brand-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 16px; padding: 28px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; transition: all 0.4s ease; position: relative; overflow: hidden; }
+        .brand-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(179, 217, 255, 0.05) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s; }
+        .brand-card:hover { transform: translateY(-6px); border-color: rgba(179, 217, 255, 0.2); background: rgba(255, 255, 255, 0.05); }
         .brand-card:hover::before { opacity: 1; }
-
-        .brand-logo-wrap {
-            width: 100%;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,255,0.92);
-            border-radius: 10px;
-            padding: 12px 16px;
-            overflow: hidden;
-        }
-
-        .brand-logo-wrap img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: none;
-        }
-
-        .brand-name {
-            font-size: 13px;
-            color: rgba(255,255,255,0.65);
-            letter-spacing: 0.5px;
-            text-align: center;
-            font-family: 'Hind Siliguri';
-        }
+        .brand-logo-wrap { width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.92); border-radius: 10px; padding: 12px 16px; overflow: hidden; }
+        .brand-logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .brand-name { font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; text-align: center; font-family: 'Hind Siliguri'; }
 
         /* --- Contact --- */
         .contact-box { max-width: 600px; width: 100%; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); }
@@ -185,7 +135,6 @@
             <span><i class="fa-solid fa-video"></i> Video Editor</span>
             <span><i class="fa-solid fa-bezier-curve"></i> Graphic Designer</span>
         </div>
-        
         <div class="hero-socials">
             <a href="https://linkedin.com/in/pabeledp" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             <a href="https://x.com/PabelEDP" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
@@ -203,63 +152,106 @@
         </div>
 
         <div id="video" class="work-grid active">
+            <!-- V-01 YouTube Shorts -->
             <div class="work-card">
                 <div class="media-box" onclick="playVid(this)">
                     <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/jj62GlZTYeg/maxresdefault.jpg">
-                    <iframe src="https://www.youtube.com/embed/jj62GlZTYeg?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <img src="https://img.youtube.com/vi/nOJiuEyuZNU/maxresdefault.jpg" alt="Banglay IELTS Online Private Batch Promo">
+                    <iframe src="https://www.youtube.com/embed/nOJiuEyuZNU?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="card-info"><h3>Motion Graphics Reel 2024</h3></div>
+                <div class="card-info"><h3>Banglay IELTS Online Private Batch Promo</h3></div>
             </div>
+            <!-- V-02 Vimeo -->
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)" data-vimeo="1133437679">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="" alt="Horror & Thrilled Visuals: Shikor TV Canada">
+                    <iframe src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Horror & Thrilled Visuals: Shikor TV Canada</h3></div>
+            </div>
+            <!-- V-03 Vimeo -->
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)" data-vimeo="1133439910">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="" alt="Emotion & Promotion: Shikor TV Canada">
+                    <iframe src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Emotion & Promotion: Shikor TV Canada</h3></div>
+            </div>
+            <!-- V-04 YouTube Shorts -->
             <div class="work-card">
                 <div class="media-box" onclick="playVid(this)">
                     <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/3Nr5HdsloYQ/maxresdefault.jpg">
+                    <img src="https://img.youtube.com/vi/94etk1eeSdo/maxresdefault.jpg" alt="Banglay IELTS & Immigration Center-BIIC Expo Offers">
+                    <iframe src="https://www.youtube.com/embed/94etk1eeSdo?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="card-info"><h3>Banglay IELTS & Immigration Center-BIIC Expo Offers</h3></div>
+            </div>
+            <!-- V-05 YouTube -->
+            <div class="work-card">
+                <div class="media-box" onclick="playVid(this)">
+                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
+                    <img src="https://img.youtube.com/vi/3Nr5HdsloYQ/maxresdefault.jpg" alt="3D Book Promo | The Quarterly Parampara">
                     <iframe src="https://www.youtube.com/embed/3Nr5HdsloYQ?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="card-info"><h3>3D Book Promo</h3></div>
+                <div class="card-info"><h3>3D Book Promo | The Quarterly Parampara</h3></div>
             </div>
+            <!-- V-06 Vimeo -->
             <div class="work-card">
-                <div class="media-box" onclick="playVid(this)">
+                <div class="media-box" onclick="playVid(this)" data-vimeo="1144245582">
                     <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/X5kDTFky4-w/hqdefault.jpg">
-                    <iframe src="https://www.youtube.com/embed/X5kDTFky4-w?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <img src="" alt="Study Abroad Reel | Education BD">
+                    <iframe src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="card-info"><h3>3D Book Promo - Version 2</h3></div>
-            </div>
-            <div class="work-card">
-                <div class="media-box" onclick="playVid(this)">
-                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/zdZs0M54n_8/maxresdefault.jpg">
-                    <iframe src="https://www.youtube.com/embed/zdZs0M54n_8?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="card-info"><h3>Web UI Animation</h3></div>
-            </div>
-            <div class="work-card">
-                <div class="media-box" onclick="playVid(this)">
-                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/T8_8yD2WeAo/maxresdefault.jpg">
-                    <iframe src="https://www.youtube.com/embed/T8_8yD2WeAo?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="card-info"><h3>Kinetic Typography</h3></div>
-            </div>
-            <div class="work-card">
-                <div class="media-box" onclick="playVid(this)">
-                    <div class="video-overlay"><div class="play-circle"><i class="fa-solid fa-play"></i></div></div>
-                    <img src="https://img.youtube.com/vi/fDe1DLLIftk/maxresdefault.jpg">
-                    <iframe src="https://www.youtube.com/embed/fDe1DLLIftk?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="card-info"><h3>Master Card Promo</h3></div>
+                <div class="card-info"><h3>Study Abroad Reel | Education BD</h3></div>
             </div>
         </div>
 
+        <!-- ================================================================
+             GRAPHIC DESIGN CARDS — নতুন project যোগ করতে একটা block
+             copy করুন এবং ৩টা জায়গা পরিবর্তন করুন:
+               1. data-href  → Behance project link
+               2. img src    → thumbnail image URL
+               3. h3 text   → project name
+        ================================================================ -->
         <div id="graphic" class="work-grid">
-            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Eid-EduBD-Behance-Thumbnail-by-Pabel.png"></div><div class="card-info"><h3>Eid Campaign</h3></div></div>
-            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Thumbnail-Designs.png"></div><div class="card-info"><h3>Thumbnails</h3></div></div>
-            <div class="work-card"><div class="media-box"><img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Social-Post-Designs.png"></div><div class="card-info"><h3>Social Media</h3></div></div>
+
+            <div class="work-card graphic-card" data-href="https://www.behance.net/gallery/246157653/Eid-Ul-Fitr-2026-Projects-EduBD">
+                <div class="media-box">
+                    <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Eid-EduBD-Behance-Thumbnail-by-Pabel.png">
+                    <div class="behance-overlay"><i class="fa-brands fa-behance"></i></div>
+                </div>
+                <div class="card-info"><h3>Eid Campaign</h3></div>
+            </div>
+
+            <div class="work-card graphic-card" data-href="https://www.behance.net/gallery/246488915/Occasional-Social-Post-Design-PabelEDP">
+                <div class="media-box">
+                    <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/First-Page-Occations-reThink-Behance-by-Pabel.png">
+                    <div class="behance-overlay"><i class="fa-brands fa-behance"></i></div>
+                </div>
+                <div class="card-info"><h3>Occasional Post Campaign</h3></div>
+            </div>
+
+            <div class="work-card graphic-card" data-href="https://www.behance.net/gallery/245515891/YouTube-Thumbnail-Project-2026-Physics">
+                <div class="media-box">
+                    <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Thumbnail-Designs.png">
+                    <div class="behance-overlay"><i class="fa-brands fa-behance"></i></div>
+                </div>
+                <div class="card-info"><h3>Thumbnails</h3></div>
+            </div>
+
+            <div class="work-card graphic-card" data-href="https://www.behance.net/gallery/226741719/Designing-Journeys-Social-Media-Campaigns">
+                <div class="media-box">
+                    <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/A-M-Pabel-Social-Post-Designs.png">
+                    <div class="behance-overlay"><i class="fa-brands fa-behance"></i></div>
+                </div>
+                <div class="card-info"><h3>Social Media</h3></div>
+            </div>
+
         </div>
 
-        <a href="https://youtube.com/@PabelEDP" id="yt-link" target="_blank" class="view-more-btn active"><i class="fa-brands fa-youtube"></i> Visit YouTube Channel</a>
+        <a href="https://ampabel.com/motiongraphics/" id="yt-link" target="_blank" class="view-more-btn active"><i class="fa-brands fa-youtube"></i> Visit More Video & Motion Graphics Projects</a>
         <a href="https://behance.net/PabelEDP" id="bh-link" target="_blank" class="view-more-btn"><i class="fa-brands fa-behance"></i> View More on Behance</a>
         <a href="#about" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
     </section>
@@ -286,51 +278,43 @@
         <div class="brands-wrapper">
             <h2 class="section-title">Brands I've Worked With</h2>
             <p class="brands-subtitle">Trusted by businesses across industries</p>
-
             <div class="brands-grid">
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Infinity.webp" alt="Infinity Mega Mall">
                     </div>
                     <span class="brand-name">Infinity Mega Mall</span>
                 </div>
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Shikor-TV.webp" alt="Canada Shikor TV">
                     </div>
                     <span class="brand-name">Canada Shikor TV</span>
                 </div>
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/BIIC.png" alt="Banglay IELTS">
                     </div>
                     <span class="brand-name">Banglay IELTS & Immigration Center</span>
                 </div>
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/reThink.jpg" alt="reThink">
                     </div>
                     <span class="brand-name">reThink</span>
                 </div>
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Education-BD.png" alt="Education BD">
                     </div>
                     <span class="brand-name">Education BD</span>
                 </div>
-
                 <div class="brand-card">
                     <div class="brand-logo-wrap">
                         <img src="https://test.framempire.com/wp/wp-content/uploads/2026/03/Rumi-Dream-Homes.jpg" alt="Rumi Dream Homes">
                     </div>
                     <span class="brand-name">Rumi Dream Homes</span>
                 </div>
-
             </div>
         </div>
         <a href="#contact" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
@@ -358,6 +342,29 @@
     </footer>
 
     <script>
+        // --- Vimeo oEmbed: auto-fetch thumbnail & set embed URL ---
+        document.querySelectorAll('.media-box[data-vimeo]').forEach(async function(box) {
+            const id = box.getAttribute('data-vimeo');
+            const iframe = box.querySelector('iframe');
+            const img = box.querySelector('img');
+            iframe.setAttribute('src', `https://player.vimeo.com/video/${id}?badge=0&autopause=0&player_id=0&app_id=58479`);
+            try {
+                const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}&width=1280`);
+                const data = await res.json();
+                if (data.thumbnail_url) {
+                    img.src = data.thumbnail_url.replace(/_\d+x\d+/, '_1280');
+                }
+            } catch(e) { img.src = ''; }
+        });
+
+        // --- Graphic cards: click to open Behance ---
+        document.querySelectorAll('.graphic-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                const url = card.getAttribute('data-href');
+                if (url) window.open(url, '_blank');
+            });
+        });
+
         function openTab(tabName) {
             document.querySelectorAll('.work-grid').forEach(g => g.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -371,13 +378,14 @@
         function playVid(el) {
             const iframe = el.querySelector('iframe');
             if (!iframe) return;
-            const videoSrc = iframe.getAttribute('src');
             if (!el.classList.contains('playing')) {
-                const separator = videoSrc.indexOf('?') === -1 ? '?' : '&';
-                iframe.setAttribute('src', videoSrc + separator + 'autoplay=1&mute=0');
+                const isVimeo = !!el.getAttribute('data-vimeo');
+                const src = iframe.getAttribute('src');
+                const sep = src.indexOf('?') === -1 ? '?' : '&';
+                iframe.setAttribute('src', src + sep + (isVimeo ? 'autoplay=1' : 'autoplay=1&mute=0'));
                 el.classList.add('playing');
-                el.querySelector('img').style.opacity = "0";
-                el.querySelector('.video-overlay').style.display = "none";
+                el.querySelector('img').style.opacity = '0';
+                el.querySelector('.video-overlay').style.display = 'none';
             }
         }
     </script>
